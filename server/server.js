@@ -1,15 +1,19 @@
-const productRoutes = require("./routes/productRoutes");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-const app = express();
+const productRoutes = require("./routes/productRoutes");
+const authRoutes = require("./routes/authRoutes");
+
+const app = express();   // ⭐ THIS LINE WAS MISSING
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
+// Routes
 app.use("/api/products", productRoutes);
+app.use("/api/auth", authRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
