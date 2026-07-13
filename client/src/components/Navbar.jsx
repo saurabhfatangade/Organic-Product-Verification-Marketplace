@@ -6,11 +6,11 @@ function Navbar() {
       display: "flex",
       justifyContent: "space-between",
       padding: "15px 30px",
-      background: "#2E7D32",
+      background: "#61aed7",
       color: "white"
     }}>
 
-      <h2>OrganicVerify</h2>
+      <h2>Organic Verify</h2>
 
       <div style={{ display: "flex", gap: "20px" }}>
         <Link to="/" style={{ color: "white", textDecoration: "none" }}>

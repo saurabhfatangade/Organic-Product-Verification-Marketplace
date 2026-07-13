@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
+
 function Home() {
   const [products, setProducts] = useState([]);
 
@@ -8,7 +9,7 @@ function Home() {
     const fetchProducts = async () => {
       try {
         const response = await api.get("/products");
-        setProducts(response.data);
+        setProducts(response.data.products || []);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -30,7 +31,7 @@ function Home() {
           <div
             key={product.id}
             style={{
-              border: "1px solid #ddd",
+              border: "1px solid #c08a8a",
               padding: "15px",
               marginBottom: "15px",
               borderRadius: "8px",
