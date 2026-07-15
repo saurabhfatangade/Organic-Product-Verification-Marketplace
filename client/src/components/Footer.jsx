@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer
       style={{
-        background: "#54bdd0",
+        background: "#54d054",
         color: "white",
         textAlign: "center",
         padding: "15px",
@@ -10,6 +10,7 @@ function Footer() {
       }}
     >
       <p>© 2026 Organic Product Verification Marketplace</p>
+      <p>© Taken by PRIME 9359935469</p>
     </footer>
   );
 }

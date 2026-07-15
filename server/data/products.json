@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Organic Rice",
+    "description": "100% certified organic rice",
+    "category": "Grains",
+    "price": 500
+  },
+  {
+    "id": 2,
+    "name": "Organic Honey",
+    "description": "Pure natural organic honey",
+    "category": "Natural Products",
+    "price": 350
+  }
+]
