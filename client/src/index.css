@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7faf7;
+}
+
+button,
+a {
+  font-family: inherit;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column !important;
+    gap: 15px;
+    padding: 15px !important;
+  }
+
+  nav > div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 30px !important;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  main {
+    min-height: 70vh;
+  }
+}

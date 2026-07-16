@@ -23,53 +23,110 @@ function Products() {
   }, []);
 
   if (loading) {
-    return <h2 style={{ padding: "30px" }}>Loading products...</h2>;
+    return (
+      <div style={{ padding: "50px", textAlign: "center" }}>
+        <h2>Loading products...</h2>
+      </div>
+    );
   }
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h1>Organic Products</h1>
+    <div
+      style={{
+        padding: "50px 30px",
+        background: "#f7faf7",
+        minHeight: "80vh",
+      }}
+    >
+      <div style={{ textAlign: "center", marginBottom: "40px" }}>
+        <h1 style={{ color: "#2E7D32", fontSize: "36px" }}>
+          Organic Products
+        </h1>
+
+        <p style={{ color: "#666" }}>
+          Discover trusted and verified organic products.
+        </p>
+      </div>
 
       {products.length === 0 ? (
-        <p>No products available.</p>
+        <div style={{ textAlign: "center" }}>
+          <h2>No products available.</h2>
+        </div>
       ) : (
-        products.map((product) => (
-          <Link
-            key={product.id}
-            to={`/products/${product.id}`}
-            style={{
-              display: "block",
-              textDecoration: "none",
-              color: "inherit",
-              marginBottom: "20px",
-            }}
-          >
-            <div
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "25px",
+            maxWidth: "1100px",
+            margin: "0 auto",
+          }}
+        >
+          {products.map((product) => (
+            <Link
+              key={product.id}
+              to={`/products/${product.id}`}
               style={{
-                border: "1px solid #ddd",
-                padding: "20px",
-                borderRadius: "10px",
-                cursor: "pointer",
+                textDecoration: "none",
+                color: "inherit",
               }}
             >
-              <h2>{product.name}</h2>
+              <div
+                style={{
+                  background: "white",
+                  borderRadius: "12px",
+                  padding: "25px",
+                  border: "1px solid #e0e0e0",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                  cursor: "pointer",
+                  height: "100%",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "50px",
+                    textAlign: "center",
+                    marginBottom: "15px",
+                  }}
+                >
+                  🌱
+                </div>
 
-              <p>{product.description}</p>
+                <h2 style={{ color: "#2E7D32" }}>
+                  {product.name}
+                </h2>
 
-              <p>
-                <strong>Category:</strong> {product.category}
-              </p>
+                <p style={{ color: "#666" }}>
+                  {product.description}
+                </p>
 
-              <p>
-                <strong>Price:</strong> ₹{product.price}
-              </p>
+                <p>
+                  <strong>Category:</strong> {product.category}
+                </p>
 
-              <p style={{ color: "green", fontWeight: "bold" }}>
-                View Product Details →
-              </p>
-            </div>
-          </Link>
-        ))
+                <p
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    color: "#2E7D32",
+                  }}
+                >
+                  ₹{product.price}
+                </p>
+
+                <div
+                  style={{
+                    color: "#2E7D32",
+                    fontWeight: "bold",
+                    marginTop: "15px",
+                  }}
+                >
+                  View Details →
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       )}
     </div>
   );

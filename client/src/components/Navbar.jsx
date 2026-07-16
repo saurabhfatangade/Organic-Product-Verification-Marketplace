@@ -19,25 +19,39 @@ function Navbar() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "15px 30px",
-        background: "#2E7D32",
-        color: "white",
+        padding: "18px 40px",
+        background: "#ffffff",
+        borderBottom: "1px solid #e5e5e5",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
       }}
     >
-      <h2>OrganicVerify</h2>
+      {/* Logo */}
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          color: "#2E7D32",
+          fontSize: "24px",
+          fontWeight: "bold",
+        }}
+      >
+        🌱 OrganicVerify
+      </Link>
 
+      {/* Navigation */}
       <div
         style={{
           display: "flex",
-          gap: "20px",
           alignItems: "center",
+          gap: "25px",
         }}
       >
         <Link
           to="/"
           style={{
-            color: "white",
             textDecoration: "none",
+            color: "#333",
+            fontWeight: "500",
           }}
         >
           Home
@@ -46,8 +60,9 @@ function Navbar() {
         <Link
           to="/products"
           style={{
-            color: "white",
             textDecoration: "none",
+            color: "#333",
+            fontWeight: "500",
           }}
         >
           Products
@@ -56,8 +71,9 @@ function Navbar() {
         <Link
           to="/cart"
           style={{
-            color: "white",
             textDecoration: "none",
+            color: "#333",
+            fontWeight: "500",
           }}
         >
           🛒 Cart
@@ -65,11 +81,21 @@ function Navbar() {
 
         {user ? (
           <>
-            <span>
+            <span style={{ color: "#2E7D32" }}>
               Welcome, {user.name}
             </span>
 
-            <button onClick={handleLogout}>
+            <button
+              onClick={handleLogout}
+              style={{
+                border: "none",
+                background: "#2E7D32",
+                color: "white",
+                padding: "8px 16px",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
               Logout
             </button>
           </>
@@ -78,8 +104,8 @@ function Navbar() {
             <Link
               to="/login"
               style={{
-                color: "white",
                 textDecoration: "none",
+                color: "#333",
               }}
             >
               Login
@@ -88,7 +114,10 @@ function Navbar() {
             <Link
               to="/register"
               style={{
+                background: "#2E7D32",
                 color: "white",
+                padding: "8px 16px",
+                borderRadius: "6px",
                 textDecoration: "none",
               }}
             >

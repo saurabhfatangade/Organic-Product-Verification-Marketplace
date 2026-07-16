@@ -1,47 +1,115 @@
-import { useEffect, useState } from "react";
-import api from "../services/api";
-
+import { Link } from "react-router-dom";
 
 function Home() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await api.get("/products");
-        setProducts(response.data.products || []);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
   return (
-    <div style={{ padding: "30px" }}>
-      <h1>Organic Product Verification Marketplace</h1>
+    <div>
+      {/* Hero Section */}
+      <section
+        style={{
+          background: "#E8F5E9",
+          padding: "80px 30px",
+          textAlign: "center",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "42px",
+            color: "#2E7D32",
+            marginBottom: "20px",
+          }}
+        >
+          Trust Every Organic Product
+        </h1>
 
-      <h2>Products</h2>
+        <p
+          style={{
+            fontSize: "20px",
+            color: "#555",
+            maxWidth: "700px",
+            margin: "0 auto 30px",
+          }}
+        >
+          Discover verified organic products from trusted sellers.
+          Shop with confidence and transparency.
+        </p>
 
-      {products.length === 0 ? (
-        <p>No products available.</p>
-      ) : (
-        products.map((product) => (
+        <Link
+          to="/products"
+          style={{
+            display: "inline-block",
+            background: "#2E7D32",
+            color: "white",
+            padding: "14px 28px",
+            borderRadius: "8px",
+            textDecoration: "none",
+            fontSize: "18px",
+          }}
+        >
+          Explore Products
+        </Link>
+      </section>
+
+      {/* Features Section */}
+      <section
+        style={{
+          padding: "50px 30px",
+          textAlign: "center",
+        }}
+      >
+        <h2>Why Choose OrganicVerify?</h2>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "30px",
+            flexWrap: "wrap",
+            marginTop: "30px",
+          }}
+        >
           <div
-            key={product.id}
             style={{
-              border: "1px solid #c08a8a",
-              padding: "15px",
-              marginBottom: "15px",
-              borderRadius: "8px",
+              width: "250px",
+              padding: "25px",
+              border: "1px solid #ddd",
+              borderRadius: "10px",
             }}
           >
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
+            <h3>✅ Verified Products</h3>
+            <p>
+              Products are checked for organic authenticity.
+            </p>
           </div>
-        ))
-      )}
+
+          <div
+            style={{
+              width: "250px",
+              padding: "25px",
+              border: "1px solid #ddd",
+              borderRadius: "10px",
+            }}
+          >
+            <h3>🌱 Organic Focus</h3>
+            <p>
+              Find natural and trustworthy organic products.
+            </p>
+          </div>
+
+          <div
+            style={{
+              width: "250px",
+              padding: "25px",
+              border: "1px solid #ddd",
+              borderRadius: "10px",
+            }}
+          >
+            <h3>🛒 Easy Shopping</h3>
+            <p>
+              Browse products and add them to your cart easily.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
