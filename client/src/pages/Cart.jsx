@@ -6,8 +6,36 @@ function Cart() {
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(savedCart);
+
+    const cartWithQuantity = savedCart.map((product) => ({
+      ...product,
+      quantity: product.quantity || 1,
+    }));
+
+    setCart(cartWithQuantity);
   }, []);
+
+  const updateQuantity = (productId, change) => {
+    const updatedCart = cart
+      .map((product) => {
+        if (product.id === productId) {
+          return {
+            ...product,
+            quantity: product.quantity + change,
+          };
+        }
+
+        return product;
+      })
+      .filter((product) => product.quantity > 0);
+
+    setCart(updatedCart);
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(updatedCart)
+    );
+  };
 
   const removeFromCart = (productId) => {
     const updatedCart = cart.filter(
@@ -23,7 +51,8 @@ function Cart() {
   };
 
   const totalPrice = cart.reduce(
-    (total, product) => total + Number(product.price || 0),
+    (total, product) =>
+      total + Number(product.price || 0) * product.quantity,
     0
   );
 
@@ -92,7 +121,10 @@ function Cart() {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  boxShadow: "0 3px 10px rgba(0,0,0,0.08)",
+                  gap: "20px",
+                  flexWrap: "wrap",
+                  boxShadow:
+                    "0 3px 10px rgba(0,0,0,0.08)",
                 }}
               >
                 <div>
@@ -103,9 +135,66 @@ function Cart() {
                   <p>{product.description}</p>
 
                   <strong>
-                    ₹{product.price}
+                    ₹{product.price} each
                   </strong>
                 </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                  }}
+                >
+                  <button
+                    onClick={() =>
+                      updateQuantity(product.id, -1)
+                    }
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      border: "1px solid #ccc",
+                      background: "white",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                      fontSize: "18px",
+                    }}
+                  >
+                    −
+                  </button>
+
+                  <strong>
+                    {product.quantity}
+                  </strong>
+
+                  <button
+                    onClick={() =>
+                      updateQuantity(product.id, 1)
+                    }
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      border: "1px solid #ccc",
+                      background: "white",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                      fontSize: "18px",
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+
+                <strong
+                  style={{
+                    color: "#2E7D32",
+                    fontSize: "18px",
+                  }}
+                >
+                  ₹
+                  {Number(product.price) *
+                    product.quantity}
+                </strong>
 
                 <button
                   onClick={() =>

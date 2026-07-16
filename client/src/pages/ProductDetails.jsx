@@ -13,7 +13,6 @@ function ProductDetails() {
     const fetchProduct = async () => {
       try {
         const response = await api.get(`/products/${id}`);
-
         setProduct(response.data.product);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -25,21 +24,47 @@ function ProductDetails() {
     fetchProduct();
   }, [id]);
 
-  const handleAddToCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+ const handleAddToCart = () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    cart.push(product);
+  const existingProduct = cart.find(
+    (item) => item.id === product.id
+  );
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+  let updatedCart;
 
-    alert("Product added to cart!");
+  if (existingProduct) {
+    updatedCart = cart.map((item) =>
+      item.id === product.id
+        ? {
+            ...item,
+            quantity: (item.quantity || 1) + 1,
+          }
+        : item
+    );
+  } else {
+    updatedCart = [
+      ...cart,
+      {
+        ...product,
+        quantity: 1,
+      },
+    ];
+  }
 
-    navigate("/cart");
-  };
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(updatedCart)
+  );
+
+  alert("Product added to cart!");
+
+  navigate("/cart");
+};
 
   if (loading) {
     return (
-      <div style={{ padding: "60px", textAlign: "center" }}>
+      <div style={{ padding: "80px", textAlign: "center" }}>
         <h2>Loading product...</h2>
       </div>
     );
@@ -47,7 +72,7 @@ function ProductDetails() {
 
   if (!product) {
     return (
-      <div style={{ padding: "60px", textAlign: "center" }}>
+      <div style={{ padding: "80px", textAlign: "center" }}>
         <h2>Product not found</h2>
 
         <Link to="/products">
@@ -62,22 +87,20 @@ function ProductDetails() {
       style={{
         background: "#f7faf7",
         minHeight: "80vh",
-        padding: "60px 30px",
+        padding: "50px 30px",
       }}
     >
       <div
         style={{
-          maxWidth: "900px",
+          maxWidth: "1000px",
           margin: "0 auto",
-          background: "white",
-          padding: "40px",
-          borderRadius: "15px",
-          boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
         }}
       >
         <Link
           to="/products"
           style={{
+            display: "inline-block",
+            marginBottom: "20px",
             color: "#2E7D32",
             textDecoration: "none",
             fontWeight: "bold",
@@ -86,81 +109,109 @@ function ProductDetails() {
           ← Back to Products
         </Link>
 
-        <div
-          style={{
-            textAlign: "center",
-            fontSize: "80px",
-            margin: "25px 0",
-          }}
-        >
-          🌱
+       <div
+  className="product-details-card"
+  style={{
+    background: "white",
+    borderRadius: "15px",
+    padding: "40px",
+    boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
+  }}
+>
+          {/* Product Image */}
+          <div
+            style={{
+              minHeight: "350px",
+              background: "#E8F5E9",
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "120px",
+            }}
+          >
+            🌱
+          </div>
+
+          {/* Product Information */}
+          <div>
+            <p
+              style={{
+                color: "#2E7D32",
+                fontWeight: "bold",
+              }}
+            >
+              VERIFIED ORGANIC PRODUCT
+            </p>
+
+            <h1
+              style={{
+                color: "#2E7D32",
+                fontSize: "36px",
+              }}
+            >
+              {product.name}
+            </h1>
+
+            <p
+              style={{
+                color: "#666",
+                fontSize: "18px",
+                lineHeight: "1.6",
+              }}
+            >
+              {product.description}
+            </p>
+
+            <hr />
+
+            <p>
+              <strong>Category:</strong> {product.category}
+            </p>
+
+            <p
+              style={{
+                fontSize: "30px",
+                color: "#2E7D32",
+                fontWeight: "bold",
+              }}
+            >
+              ₹{product.price}
+            </p>
+
+            <div
+              style={{
+                background: "#E8F5E9",
+                padding: "15px",
+                borderRadius: "8px",
+                margin: "20px 0",
+              }}
+            >
+              <strong>✅ Organic Verification</strong>
+
+              <p>
+                This product is listed as a verified organic product
+                on OrganicVerify.
+              </p>
+            </div>
+
+            <button
+              onClick={handleAddToCart}
+              style={{
+                width: "100%",
+                padding: "15px",
+                background: "#2E7D32",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                fontSize: "18px",
+                cursor: "pointer",
+              }}
+            >
+              🛒 Add to Cart
+            </button>
+          </div>
         </div>
-
-        <h1
-          style={{
-            textAlign: "center",
-            color: "#2E7D32",
-          }}
-        >
-          {product.name}
-        </h1>
-
-        <p
-          style={{
-            textAlign: "center",
-            color: "#666",
-            fontSize: "18px",
-          }}
-        >
-          {product.description}
-        </p>
-
-        <hr />
-
-        <p>
-          <strong>Category:</strong> {product.category}
-        </p>
-
-        <p
-          style={{
-            fontSize: "24px",
-            color: "#2E7D32",
-            fontWeight: "bold",
-          }}
-        >
-          ₹{product.price}
-        </p>
-
-        <div
-          style={{
-            background: "#E8F5E9",
-            padding: "15px",
-            borderRadius: "8px",
-            margin: "20px 0",
-          }}
-        >
-          <strong>✅ Verified Organic Product</strong>
-
-          <p>
-            This product is listed on the OrganicVerify marketplace.
-          </p>
-        </div>
-
-        <button
-          onClick={handleAddToCart}
-          style={{
-            width: "100%",
-            padding: "15px",
-            background: "#2E7D32",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            fontSize: "18px",
-            cursor: "pointer",
-          }}
-        >
-          🛒 Add to Cart
-        </button>
       </div>
     </div>
   );

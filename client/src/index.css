@@ -37,3 +37,16 @@ a {
     min-height: 70vh;
   }
 }
+.product-details-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .product-details-card {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 20px !important;
+  }
+}
