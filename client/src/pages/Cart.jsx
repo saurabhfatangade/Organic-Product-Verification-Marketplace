@@ -226,22 +226,20 @@ function Cart() {
                 Total: ₹{totalPrice}
               </h2>
 
-              <button
-                style={{
-                  background: "#2E7D32",
-                  color: "white",
-                  border: "none",
-                  padding: "14px 30px",
-                  borderRadius: "6px",
-                  fontSize: "16px",
-                  cursor: "pointer",
-                }}
-                onClick={() =>
-                  alert("Checkout coming soon!")
-                }
-              >
-                Proceed to Checkout
-              </button>
+           <Link
+  to="/checkout"
+  style={{
+    display: "inline-block",
+    background: "#2E7D32",
+    color: "white",
+    padding: "14px 30px",
+    borderRadius: "6px",
+    fontSize: "16px",
+    textDecoration: "none",
+  }}
+>
+  Proceed to Checkout
+</Link>
             </div>
           </>
         )}

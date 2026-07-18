@@ -78,6 +78,9 @@ function Navbar() {
         >
           🛒 Cart
         </Link>
+        <Link to="/orders">
+  Orders
+</Link>
 
         {user ? (
           <>

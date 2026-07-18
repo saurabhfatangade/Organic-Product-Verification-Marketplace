@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import api from "../services/api";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -37,12 +38,36 @@ function Checkout() {
     });
   };
 
-  const handleSubmit = (e) => {
+  // ONLY ONE handleSubmit function
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    alert("Checkout form submitted!");
+    try {
+      const orderData = {
+        customer: formData,
+        items: cart,
+        total: totalPrice,
+      };
 
-    navigate("/order-success");
+      const response = await api.post(
+        "/orders",
+        orderData
+      );
+
+      localStorage.removeItem("cart");
+
+      navigate("/order-success", {
+        state: {
+          order: response.data.order,
+        },
+      });
+    } catch (error) {
+      console.error("Error placing order:", error);
+
+      alert(
+        "Failed to place order. Please try again."
+      );
+    }
   };
 
   if (cart.length === 0) {
@@ -95,8 +120,6 @@ function Checkout() {
             gap: "30px",
           }}
         >
-          {/* Customer Information */}
-
           <form
             onSubmit={handleSubmit}
             style={{
@@ -179,8 +202,6 @@ function Checkout() {
               Place Order
             </button>
           </form>
-
-          {/* Order Summary */}
 
           <div
             style={{
