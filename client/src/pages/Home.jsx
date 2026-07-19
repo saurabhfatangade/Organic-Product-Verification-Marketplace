@@ -4,6 +4,8 @@ function Home() {
   return (
     <div>
       {/* Hero Section */}
+
+      
       <section
         style={{
           background: "#E8F5E9",
@@ -47,6 +49,23 @@ function Home() {
         >
           Explore Products
         </Link>
+
+        <Link
+  to="/orders"
+  style={{
+    display: "inline-block",
+    marginLeft: "15px",
+    padding: "14px 28px",
+    background: "white",
+    color: "#2E7D32",
+    border: "1px solid #2E7D32",
+    borderRadius: "8px",
+    textDecoration: "none",
+    fontSize: "18px",
+  }}
+>
+  View My Orders
+</Link>
       </section>
 
       {/* Features Section */}

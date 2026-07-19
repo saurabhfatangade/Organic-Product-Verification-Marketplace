@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
-
 function Orders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -93,6 +93,22 @@ function Orders() {
                 order.createdAt
               ).toLocaleString()}
             </p>
+
+            <Link
+  to={`/orders/${order.id}`}
+  style={{
+    display: "inline-block",
+    marginTop: "15px",
+    padding: "10px 18px",
+    background: "#2E7D32",
+    color: "white",
+    borderRadius: "6px",
+    textDecoration: "none",
+  }}
+>
+  View Details
+</Link>
+
           </div>
         ))
       )}
