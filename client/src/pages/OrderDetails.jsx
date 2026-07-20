@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import api from "../services/api";
+import OrderStatus from "../components/OrderStatus";
 
 function OrderDetails() {
   const { id } = useParams();
@@ -76,6 +77,8 @@ function OrderDetails() {
             <strong>Status:</strong>{" "}
             {order.status}
           </p>
+
+          <OrderStatus status={order.status} />
 
           <p>
             <strong>Customer:</strong>{" "}
