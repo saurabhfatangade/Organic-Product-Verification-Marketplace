@@ -137,6 +137,8 @@ function Navbar() {
               Register
             </Link>
           </>
+
+          
         )}
       </div>
     </nav>

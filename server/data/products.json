@@ -11,6 +11,7 @@
     "name": "Organic Honey",
     "description": "Pure natural organic honey",
     "category": "Natural Products",
-    "price": 350
+    "price": 350,
+    "image": "https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=600"
   }
 ]
