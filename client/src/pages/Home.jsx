@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
+import greenImage from "../assets/green.png";
 
 function Home() {
   return (
     <div>
       {/* Hero Section */}
-
-      
       <section
         style={{
-          background: "#E8F5E9",
-          padding: "80px 30px",
+         backgroundImage: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url(${greenImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          padding: "120px 30px",
           textAlign: "center",
         }}
       >
         <h1
           style={{
-            fontSize: "42px",
-            color: "#2E7D32",
+            fontSize: "48px",
+            color: "white",
             marginBottom: "20px",
+            fontWeight: "bold",
           }}
         >
           Trust Every Organic Product
@@ -25,8 +28,8 @@ function Home() {
 
         <p
           style={{
-            fontSize: "20px",
-            color: "#555",
+            fontSize: "22px",
+            color: "#f5f5f5",
             maxWidth: "700px",
             margin: "0 auto 30px",
           }}
@@ -45,37 +48,47 @@ function Home() {
             borderRadius: "8px",
             textDecoration: "none",
             fontSize: "18px",
+            fontWeight: "bold",
           }}
         >
           Explore Products
         </Link>
 
         <Link
-  to="/orders"
-  style={{
-    display: "inline-block",
-    marginLeft: "15px",
-    padding: "14px 28px",
-    background: "white",
-    color: "#2E7D32",
-    border: "1px solid #2E7D32",
-    borderRadius: "8px",
-    textDecoration: "none",
-    fontSize: "18px",
-  }}
->
-  View My Orders
-</Link>
+          to="/orders"
+          style={{
+            display: "inline-block",
+            marginLeft: "15px",
+            padding: "14px 28px",
+            background: "white",
+            color: "#2E7D32",
+            border: "1px solid #2E7D32",
+            borderRadius: "8px",
+            textDecoration: "none",
+            fontSize: "18px",
+            fontWeight: "bold",
+          }}
+        >
+          View My Orders
+        </Link>
       </section>
 
       {/* Features Section */}
       <section
         style={{
-          padding: "50px 30px",
+          padding: "60px 30px",
           textAlign: "center",
         }}
       >
-        <h2>Why Choose OrganicVerify?</h2>
+        <h2
+          style={{
+            color: "#2E7D32",
+            fontSize: "36px",
+            marginBottom: "40px",
+          }}
+        >
+          Why Choose OrganicVerify?
+        </h2>
 
         <div
           style={{
@@ -83,48 +96,56 @@ function Home() {
             justifyContent: "center",
             gap: "30px",
             flexWrap: "wrap",
-            marginTop: "30px",
           }}
         >
           <div
             style={{
-              width: "250px",
+              width: "280px",
               padding: "25px",
               border: "1px solid #ddd",
-              borderRadius: "10px",
+              borderRadius: "12px",
+              background: "white",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
             }}
           >
             <h3>✅ Verified Products</h3>
+
             <p>
-              Products are checked for organic authenticity.
+              Products are verified for authenticity before listing.
             </p>
           </div>
 
           <div
             style={{
-              width: "250px",
+              width: "280px",
               padding: "25px",
               border: "1px solid #ddd",
-              borderRadius: "10px",
+              borderRadius: "12px",
+              background: "white",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
             }}
           >
             <h3>🌱 Organic Focus</h3>
+
             <p>
-              Find natural and trustworthy organic products.
+              Buy natural and trusted organic products with confidence.
             </p>
           </div>
 
           <div
             style={{
-              width: "250px",
+              width: "280px",
               padding: "25px",
               border: "1px solid #ddd",
-              borderRadius: "10px",
+              borderRadius: "12px",
+              background: "white",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
             }}
           >
             <h3>🛒 Easy Shopping</h3>
+
             <p>
-              Browse products and add them to your cart easily.
+              Search, filter, add to cart and order products easily.
             </p>
           </div>
         </div>

@@ -118,20 +118,24 @@ function ProductDetails() {
     boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
   }}
 >
-          {/* Product Image */}
-          <div
-            style={{
-              minHeight: "350px",
-              background: "#E8F5E9",
-              borderRadius: "12px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "120px",
-            }}
-          >
-            🌱
-          </div>
+  {/* Product Image */}
+<img
+  src={product.image}
+  alt={product.name}
+  style={{
+    width: "100%",
+    maxWidth: "450px",
+    height: "350px",
+    objectFit: "cover",
+    borderRadius: "12px",
+    display: "block",
+    margin: "0 auto 30px",
+  }}
+  onError={(e) => {
+    e.target.src =
+      "https://via.placeholder.com/500x350?text=Organic+Product";
+  }}
+/>
 
           {/* Product Information */}
           <div>

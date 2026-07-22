@@ -287,21 +287,21 @@ function Products() {
                   height: "100%",
                 }}
               >
-                <div
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    background: "#E8F5E9",
-                    borderRadius: "10px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "70px",
-                    marginBottom: "20px",
-                  }}
-                >
-                  🌱
-                </div>
+             <img
+  src={product.image}
+  alt={product.name}
+  style={{
+    width: "100%",
+    height: "180px",
+    objectFit: "cover",
+    borderRadius: "10px",
+    marginBottom: "15px",
+  }}
+  onError={(e) => {
+    e.target.src =
+      "https://via.placeholder.com/400x250?text=Organic+Product";
+  }}
+/>
 
                 <h2
                   style={{
