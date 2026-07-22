@@ -6,6 +6,7 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const [sortOption, setSortOption] = useState("default");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -43,6 +44,27 @@ function Products() {
 
     return matchesSearch && matchesCategory;
   });
+
+  const sortedProducts = [...filteredProducts];
+
+  switch (sortOption) {
+    case "price-low":
+      sortedProducts.sort((a, b) => a.price - b.price);
+      break;
+
+    case "price-high":
+      sortedProducts.sort((a, b) => b.price - a.price);
+      break;
+
+    case "name":
+      sortedProducts.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      break;
+
+    default:
+      break;
+  }
 
   if (loading) {
     return (
@@ -146,7 +168,6 @@ function Products() {
             fontSize: "16px",
           }}
         >
-          
           <option value="All">All Categories</option>
           <option value="Grains">Grains</option>
           <option value="Natural Products">
@@ -154,40 +175,74 @@ function Products() {
           </option>
         </select>
 
-        <p
-  style={{
-    marginTop: "20px",
-    color: "#555",
-  }}
->
-  Showing{" "}
-  <strong>{filteredProducts.length}</strong>{" "}
-  of{" "}
-  <strong>{products.length}</strong>{" "}
-  products
-</p>
+        <div
+          style={{
+            marginTop: "20px",
+          }}
+        >
+          <label>
+            <strong>Sort By: </strong>
+          </label>
 
-<button
-  onClick={() => {
-    setSearch("");
-    setCategory("All");
-  }}
-  style={{
-    marginTop: "10px",
-    padding: "10px 20px",
-    background: "#ffffff",
-    color: "#2E7D32",
-    border: "1px solid #2E7D32",
-    borderRadius: "6px",
-    cursor: "pointer",
-  }}
->
-  Clear Filters
-</button>
+          <select
+            value={sortOption}
+            onChange={(e) =>
+              setSortOption(e.target.value)
+            }
+            style={{
+              padding: "8px",
+              marginLeft: "10px",
+            }}
+          >
+            <option value="default">
+              Default
+            </option>
 
+            <option value="price-low">
+              Price: Low to High
+            </option>
+
+            <option value="price-high">
+              Price: High to Low
+            </option>
+
+            <option value="name">
+              Name (A-Z)
+            </option>
+          </select>
+        </div>
+                <p
+          style={{
+            marginTop: "20px",
+            color: "#555",
+          }}
+        >
+          Showing{" "}
+          <strong>{filteredProducts.length}</strong> of{" "}
+          <strong>{products.length}</strong> products
+        </p>
+
+        <button
+          onClick={() => {
+            setSearch("");
+            setCategory("All");
+            setSortOption("default");
+          }}
+          style={{
+            marginTop: "10px",
+            padding: "10px 20px",
+            background: "#ffffff",
+            color: "#2E7D32",
+            border: "1px solid #2E7D32",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Clear Filters
+        </button>
       </div>
 
-      {filteredProducts.length === 0 ? (
+      {sortedProducts.length === 0 ? (
         <div
           style={{
             textAlign: "center",
@@ -205,13 +260,13 @@ function Products() {
           style={{
             display: "grid",
             gridTemplateColumns:
-              "repeat(auto-fit, minmax(260px, 1fr))",
+              "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "25px",
-            maxWidth: "1100px",
+            maxWidth: "1200px",
             margin: "0 auto",
           }}
         >
-          {filteredProducts.map((product) => (
+          {sortedProducts.map((product) => (
             <Link
               key={product.id}
               to={`/products/${product.id}`}
@@ -224,11 +279,11 @@ function Products() {
                 style={{
                   background: "white",
                   borderRadius: "12px",
-                  padding: "25px",
-                  border: "1px solid #e0e0e0",
+                  padding: "20px",
+                  border: "1px solid #e5e5e5",
                   boxShadow:
                     "0 4px 12px rgba(0,0,0,0.08)",
-                  cursor: "pointer",
+                  transition: "0.3s",
                   height: "100%",
                 }}
               >
@@ -241,31 +296,47 @@ function Products() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "80px",
-                    marginBottom: "15px",
+                    fontSize: "70px",
+                    marginBottom: "20px",
                   }}
                 >
                   🌱
                 </div>
 
-                <h2 style={{ color: "#2E7D32" }}>
+                <h2
+                  style={{
+                    color: "#2E7D32",
+                    marginBottom: "10px",
+                    fontSize: "22px",
+                  }}
+                >
                   {product.name}
                 </h2>
 
-                <p style={{ color: "#666" }}>
+                <p
+                  style={{
+                    color: "#666",
+                    minHeight: "50px",
+                  }}
+                >
                   {product.description}
                 </p>
 
-                <p>
+                <p
+                  style={{
+                    color: "#777",
+                  }}
+                >
                   <strong>Category:</strong>{" "}
                   {product.category}
                 </p>
 
                 <p
                   style={{
-                    fontSize: "20px",
+                    fontSize: "24px",
                     fontWeight: "bold",
                     color: "#2E7D32",
+                    margin: "15px 0",
                   }}
                 >
                   ₹{product.price}
@@ -273,9 +344,12 @@ function Products() {
 
                 <div
                   style={{
-                    color: "#2E7D32",
+                    display: "inline-block",
+                    padding: "10px 18px",
+                    background: "#2E7D32",
+                    color: "white",
+                    borderRadius: "8px",
                     fontWeight: "bold",
-                    marginTop: "15px",
                   }}
                 >
                   View Details →
