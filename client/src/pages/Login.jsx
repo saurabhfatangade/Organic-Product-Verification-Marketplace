@@ -1,31 +1,33 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
+try {
+  const response = await api.post("/auth/login", {
+    email,
+    password,
+  });
 
-    try {
-      const response = await api.post("/auth/login", {
-        email,
-        password,
-      });
+  localStorage.setItem(
+    "user",
+    JSON.stringify(response.data.user)
+  );
 
-      localStorage.setItem(
-  "user",
-  JSON.stringify(response.data.user)
-);
+  alert(response.data.message);
 
-alert(response.data.message);
-    } catch (error) {
-      alert(
-        error.response?.data?.message ||
-        "Login failed"
-      );
-    }
+  navigate("/");
+} catch (error) {
+  alert(
+    error.response?.data?.message ||
+    "Login failed"
+  );
+}
   };
 
   return (

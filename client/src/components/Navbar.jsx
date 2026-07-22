@@ -13,6 +13,15 @@ function Navbar() {
     window.location.href = "/";
   };
 
+  const handleLogout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+
+  alert("Logged out successfully.");
+
+  window.location.href = "/";
+};
+
   return (
     <nav
       style={{
@@ -87,6 +96,7 @@ function Navbar() {
             <span style={{ color: "#2E7D32" }}>
               Welcome, {user.name}
             </span>
+            
 
             <button
               onClick={handleLogout}

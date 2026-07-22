@@ -24,7 +24,58 @@ function Cart() {
             quantity: product.quantity + change,
           };
         }
+const increaseQuantity = (id) => {
+  const updatedCart = cart.map((item) =>
+    item.id === id
+      ? {
+          ...item,
+          quantity: (item.quantity || 1) + 1,
+        }
+      : item
+  );
 
+  setCart(updatedCart);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(updatedCart)
+  );
+};
+
+const decreaseQuantity = (id) => {
+  const updatedCart = cart
+    .map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            quantity: Math.max(
+              1,
+              (item.quantity || 1) - 1
+            ),
+          }
+        : item
+    );
+
+  setCart(updatedCart);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(updatedCart)
+  );
+};
+
+const removeItem = (id) => {
+  const updatedCart = cart.filter(
+    (item) => item.id !== id
+  );
+
+  setCart(updatedCart);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(updatedCart)
+  );
+};
         return product;
       })
       .filter((product) => product.quantity > 0);
@@ -50,12 +101,13 @@ function Cart() {
     );
   };
 
-  const totalPrice = cart.reduce(
-    (total, product) =>
-      total + Number(product.price || 0) * product.quantity,
-    0
-  );
-
+ const totalPrice = cart.reduce(
+  (total, item) =>
+    total +
+    Number(item.price) *
+      (item.quantity || 1),
+  0
+);
   return (
     <div
       style={{
@@ -136,6 +188,38 @@ function Cart() {
 
                   <strong>
                     ₹{product.price} each
+                    <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    marginTop: "10px",
+  }}
+>
+  <button
+    onClick={() => decreaseQuantity(product.id)}
+  >
+    -
+  </button>
+
+  <strong>{product.quantity || 1}</strong>
+
+  <button
+    onClick={() => increaseQuantity(product.id)}
+  >
+    +
+  </button>
+
+  <button
+    onClick={() => removeItem(product.id)}
+    style={{
+      marginLeft: "20px",
+      color: "red",
+    }}
+  >
+    Remove
+  </button>
+</div>
                   </strong>
                 </div>
 
@@ -226,20 +310,36 @@ function Cart() {
                 Total: ₹{totalPrice}
               </h2>
 
-           <Link
-  to="/checkout"
-  style={{
-    display: "inline-block",
-    background: "#2E7D32",
-    color: "white",
-    padding: "14px 30px",
-    borderRadius: "6px",
-    fontSize: "16px",
-    textDecoration: "none",
-  }}
->
-  Proceed to Checkout
-</Link>
+       {cart.length > 0 ? (
+  <Link to="/checkout">
+    <button
+      style={{
+        padding: "12px 25px",
+        background: "#2E7D32",
+        color: "white",
+        border: "none",
+        borderRadius: "8px",
+        cursor: "pointer",
+      }}
+    >
+      Proceed to Checkout
+    </button>
+  </Link>
+) : (
+  <button
+    disabled
+    style={{
+      padding: "12px 25px",
+      background: "#ccc",
+      color: "#666",
+      border: "none",
+      borderRadius: "8px",
+      cursor: "not-allowed",
+    }}
+  >
+    Cart is Empty
+  </button>
+)}
             </div>
           </>
         )}

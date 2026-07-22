@@ -16,9 +16,13 @@ function App() {
           path="/"
           element={<Home />}
         />
-        <Route
+      <Route
   path="/orders/:id"
-  element={<OrderDetails />}
+  element={
+    <ProtectedRoute>
+      <OrderDetails />
+    </ProtectedRoute>
+  }
 />
 
         <Route
@@ -36,20 +40,27 @@ function App() {
           element={<Cart />}
         />
 
-        <Route
-          path="/checkout"
-          element={<Checkout />}
-        />
+       <Route
+  path="/checkout"
+  element={
+    <ProtectedRoute>
+      <Checkout />
+    </ProtectedRoute>
+  }
+/>
 
         <Route
           path="/order-success"
           element={<OrderSuccess />}
         />
-
-        <Route
-          path="/orders"
-          element={<Orders />}
-        />
+<Route
+  path="/orders"
+  element={
+    <ProtectedRoute>
+      <Orders />
+    </ProtectedRoute>
+  }
+/>
       </Routes>
     </BrowserRouter>
   );
