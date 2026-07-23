@@ -90,6 +90,9 @@ function Navbar() {
         <Link to="/orders">
   Orders
 </Link>
+<Link to="/wishlist">
+  ❤️ Wishlist
+</Link>
 
         {user ? (
           <>

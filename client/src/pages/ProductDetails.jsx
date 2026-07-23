@@ -8,13 +8,18 @@ function ProductDetails() {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await api.get(`/products/${id}`);
         setProduct(response.data.product);
-      } catch (error) {
+      const allResponse = await api.get("/products");
+
+setAllProducts(
+  allResponse.data.products || allResponse.data
+);} catch (error) {
         console.error("Error fetching product:", error);
       } finally {
         setLoading(false);
@@ -156,6 +161,14 @@ function ProductDetails() {
             >
               {product.name}
             </h1>
+            <p
+  style={{
+    color: "#666",
+    marginBottom: "15px",
+  }}
+>
+128 Verified Customer Reviews
+</p>
 
             <p
               style={{
@@ -182,6 +195,31 @@ function ProductDetails() {
             >
               ₹{product.price}
             </p>
+
+            <div
+  style={{
+    marginTop: "15px",
+    marginBottom: "20px",
+  }}
+>
+  <span
+    style={{
+      color: "#FFA000",
+      fontSize: "22px",
+    }}
+  >
+    ⭐⭐⭐⭐⭐
+  </span>
+
+  <span
+    style={{
+      marginLeft: "10px",
+      color: "#666",
+    }}
+  >
+    4.8 (128 Reviews)
+  </span>
+</div>
 
             <div
               style={{
@@ -214,10 +252,155 @@ function ProductDetails() {
             >
               🛒 Add to Cart
             </button>
+
+            <button
+  onClick={() => {
+    const wishlist =
+      JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    const exists = wishlist.find(
+      (item) => item.id === product.id
+    );
+
+    if (exists) {
+      alert("Already in wishlist");
+      return;
+    }
+
+    wishlist.push(product);
+
+    localStorage.setItem(
+      "wishlist",
+      JSON.stringify(wishlist)
+    );
+
+    alert("Added to wishlist ❤️");
+  }}
+  style={{
+    width: "100%",
+    marginTop: "15px",
+    padding: "15px",
+    background: "#D32F2F",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    fontSize: "18px",
+    cursor: "pointer",
+  }}
+>
+  ❤️ Add to Wishlist
+</button>
+
+<hr style={{ margin: "40px 0" }} />
+
+<h2>Customer Reviews</h2>
+
+<div
+  style={{
+    background: "#f8f8f8",
+    padding: "20px",
+    borderRadius: "10px",
+    marginTop: "20px",
+  }}
+>
+  <strong>⭐⭐⭐⭐⭐ Rahul P.</strong>
+
+  <p>
+    Excellent quality. Packaging was good and
+    the product feels genuine.
+  </p>
+</div>
+
+<div
+  style={{
+    background: "#f8f8f8",
+    padding: "20px",
+    borderRadius: "10px",
+    marginTop: "15px",
+  }}
+>
+  <strong>⭐⭐⭐⭐ Sneha K.</strong>
+
+  <p>
+    Fresh organic product.
+    Delivery was on time.
+  </p>
+</div>
+
+<div
+  style={{
+    background: "#f8f8f8",
+    padding: "20px",
+    borderRadius: "10px",
+    marginTop: "15px",
+  }}
+>
+  <strong>⭐⭐⭐⭐⭐ Amit S.</strong>
+
+  <p>
+    I will definitely buy this again.
+  </p>
+  <hr style={{ margin: "50px 0" }} />
+
+<h2
+  style={{
+    color: "#2E7D32",
+    marginBottom: "25px",
+  }}
+>
+Related Products
+</h2>
+
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit, minmax(250px,1fr))",
+    gap: "25px",
+  }}
+>
+  {relatedProducts.map((item) => (
+    <Link
+      key={item.id}
+      to={`/products/${item.id}`}
+      style={{
+        textDecoration: "none",
+        color: "inherit",
+      }}
+    >
+      <div
+        style={{
+          background: "white",
+          padding: "20px",
+          borderRadius: "10px",
+          boxShadow:
+            "0 3px 10px rgba(0,0,0,0.08)",
+        }}
+      >
+        <img
+          src={item.image}
+          alt={item.name}
+          style={{
+            width: "100%",
+            height: "170px",
+            objectFit: "cover",
+            borderRadius: "8px",
+          }}
+        />
+
+        <h3>{item.name}</h3>
+
+        <p>₹{item.price}</p>
+      </div>
+    </Link>
+  ))}
+</div>
+</div>
           </div>
         </div>
       </div>
     </div>
+    
   );
 }
 

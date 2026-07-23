@@ -150,7 +150,159 @@ function Home() {
           </div>
         </div>
       </section>
+      <section
+  style={{
+    background: "#2E7D32",
+    color: "white",
+    padding: "60px 30px",
+    marginTop: "40px",
+  }}
+>
+  <h2
+    style={{
+      textAlign: "center",
+      marginBottom: "40px",
+    }}
+  >
+    OrganicVerify in Numbers
+  </h2>
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-around",
+      flexWrap: "wrap",
+      gap: "30px",
+      textAlign: "center",
+    }}
+  >
+    <div>
+      <h1>500+</h1>
+      <p>Verified Products</p>
     </div>
+
+    <div>
+      <h1>150+</h1>
+      <p>Trusted Sellers</p>
+    </div>
+
+    <div>
+      <h1>2000+</h1>
+      <p>Happy Customers</p>
+    </div>
+
+    <div>
+      <h1>98%</h1>
+      <p>Customer Satisfaction</p>
+    </div>
+  </div>
+</section>
+<section
+  style={{
+    padding: "60px 30px",
+    textAlign: "center",
+  }}
+>
+  <h2>Why Customers Trust Us</h2>
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      gap: "25px",
+      marginTop: "35px",
+    }}
+  >
+    <div style={{ width: "260px" }}>
+      <h3>🔒 Secure Shopping</h3>
+      <p>Your information is handled securely.</p>
+    </div>
+
+    <div style={{ width: "260px" }}>
+      <h3>🚚 Fast Delivery</h3>
+      <p>Quick delivery of verified organic products.</p>
+    </div>
+
+    <div style={{ width: "260px" }}>
+      <h3>🌿 Certified Organic</h3>
+      <p>Products are verified before being listed.</p>
+    </div>
+  </div>
+</section>
+<footer
+  style={{
+    background: "#1B5E20",
+    color: "white",
+    marginTop: "50px",
+    padding: "50px 30px",
+  }}
+>
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns:
+        "repeat(auto-fit, minmax(250px,1fr))",
+      gap: "30px",
+      maxWidth: "1200px",
+      margin: "0 auto",
+    }}
+  >
+    {/* About */}
+    <div>
+      <h2>OrganicVerify</h2>
+
+      <p>
+        OrganicVerify helps customers find
+        genuine organic products from trusted
+        sellers with complete transparency.
+      </p>
+    </div>
+
+    {/* Quick Links */}
+    <div>
+      <h3>Quick Links</h3>
+
+      <p>🏠 Home</p>
+
+      <p>🛍 Products</p>
+
+      <p>🛒 Cart</p>
+
+      <p>📦 Orders</p>
+    </div>
+
+    {/* Contact */}
+    <div>
+      <h3>Contact</h3>
+
+      <p>📧 support@organicverify.com</p>
+
+      <p>📞 +91 9876543210</p>
+
+      <p>📍 Maharashtra, India</p>
+    </div>
+  </div>
+
+  <hr
+    style={{
+      margin: "30px 0",
+      borderColor: "#4CAF50",
+    }}
+  />
+
+  <p
+    style={{
+      textAlign: "center",
+      margin: 0,
+    }}
+  >
+    © 2026 OrganicVerify. All Rights Reserved.
+  </p>
+</footer>
+    </div>
+
+    
   );
 }
 
