@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
-
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 function Navbar() {
   const savedUser = localStorage.getItem("user");
+const { cart } = useContext(CartContext);
 
+const totalItems = cart.reduce(
+  (total, item) => total + (item.quantity || 1),
+  0
+);
   const user = savedUser
     ? JSON.parse(savedUser)
     : null;
@@ -78,15 +84,15 @@ function Navbar() {
         </Link>
 
         <Link
-          to="/cart"
-          style={{
-            textDecoration: "none",
-            color: "#333",
-            fontWeight: "500",
-          }}
-        >
-          🛒 Cart
-        </Link>
+  to="/cart"
+  style={{
+    textDecoration: "none",
+    color: "white",
+    fontWeight: "bold",
+  }}
+>
+  🛒 Cart ({totalItems})
+</Link>
         <Link to="/orders">
   Orders
 </Link>
